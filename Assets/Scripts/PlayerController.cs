@@ -6,9 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Animator anim;
+    [SerializeField] PlayerPowerupController playerPowerup;
     [SerializeField] GameObject checkGround;
     [SerializeField] LayerMask layerGround;
     [SerializeField] bool inGround;
+    public bool InGround
+    {
+        get { return inGround; }
+    }
     [SerializeField] Animator playerAnim;
     [SerializeField] Rigidbody2D playerRB;
     [SerializeField] bool gambiarra = true;
@@ -72,7 +77,39 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        toCheckGround();
+        switch (playerPowerup.Element)
+        {
+            case 0:
+                anim.SetBool("onFire", false);
+                anim.SetBool("onWind", false);
+                anim.SetBool("onWater", false);
+                anim.SetBool("onEarth", false);
+                break;
+            case 1:
+                anim.SetBool("onFire", true);
+                anim.SetBool("onWind", false);
+                anim.SetBool("onWater", false);
+                anim.SetBool("onEarth", false);
+                break;
+            case 2:
+                anim.SetBool("onFire", false);
+                anim.SetBool("onWind", true);
+                anim.SetBool("onWater", false);
+                anim.SetBool("onEarth", false);
+                break;
+            case 3:
+                anim.SetBool("onFire", false);
+                anim.SetBool("onWind", false);
+                anim.SetBool("onWater", true);
+                anim.SetBool("onEarth", false);
+                break;
+            case 4:
+                anim.SetBool("onFire", false);
+                anim.SetBool("onWind", false);
+                anim.SetBool("onWater", false);
+                anim.SetBool("onEarth", true);
+                break;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -102,6 +139,8 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Falling());
         }
+
+        toCheckGround();
 
     }
 

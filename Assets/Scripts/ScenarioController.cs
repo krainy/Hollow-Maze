@@ -19,26 +19,33 @@ public class ScenarioController : MonoBehaviour
     IEnumerator RotateWalls(int rotation)
     {
         rotating = true;
-        playerScript.CanJump = true;
+
         float iniRotate = this.transform.localRotation.eulerAngles.z;
         int rotateSide = rotation / 90;
-        Quaternion target = Quaternion.Euler(this.transform.localRotation.eulerAngles.x, this.transform.localRotation.eulerAngles.y, this.transform.localRotation.eulerAngles.z + rotation);
 
-        if (iniRotate + rotation < 0)
+        if (rotation != 180)
         {
-            iniRotate += 360;
-        }
-        else if (iniRotate + rotation >= 360)
-        {
-            iniRotate -= 360;
+            playerScript.CanJump = true;
+            Quaternion target = Quaternion.Euler(this.transform.localRotation.eulerAngles.x, this.transform.localRotation.eulerAngles.y, this.transform.localRotation.eulerAngles.z + rotation);
+
+            if (iniRotate + rotation < 0)
+            {
+                iniRotate += 360;
+            }
+            else if (iniRotate + rotation >= 360)
+            {
+                iniRotate -= 360;
+            }
+
+            Debug.Log("Rotação inicial: " + iniRotate);
+            Debug.Log("Rotação final: " + (iniRotate + rotation));
+
+            while (!playerScript.AbleToRotate)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
 
-        Debug.Log("Rotação inicial: " + iniRotate);
-        Debug.Log("Rotação final: " + (iniRotate + rotation));
-
-        while(!playerScript.AbleToRotate){
-            yield return new WaitForEndOfFrame();
-        }
 
         while ((int)this.transform.localRotation.eulerAngles.z != iniRotate + rotation)
         {
@@ -46,8 +53,29 @@ public class ScenarioController : MonoBehaviour
             //Debug.Log((int)this.transform.localRotation.eulerAngles.z);
             //transform.rotateAround = Quaternion.Lerp(transform.rotation, target, Time.deltaTime * rotateSpeed);
             transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), Time.deltaTime * rotateSpeed);
-            if (Mathf.Abs((iniRotate + rotation) - this.transform.localRotation.eulerAngles.z) < 1)
+            if (Mathf.Abs((iniRotate + rotation) - this.transform.localRotation.eulerAngles.z) < Time.deltaTime * rotateSpeed)
             {
+
+                //Debug.Log(Mathf.RoundToInt(Mathf.Abs(this.transform.localRotation.eulerAngles.z) / 90));
+
+                //Debug.Log(this.transform.localRotation.eulerAngles.z);
+
+                int gambiarra = Mathf.RoundToInt(Mathf.Abs(this.transform.localRotation.eulerAngles.z) / this.transform.localRotation.eulerAngles.z);
+
+                Debug.Log(Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90) * 90);
+
+                transform.localRotation = Quaternion.Euler(0f, 0f, Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90) * 90);
+                if (this.transform.localRotation.eulerAngles.z >= (this.transform.localRotation.eulerAngles.z / 90) * 90)
+                {
+                }
+                else
+                {
+
+                }
+
+                //transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), Time.deltaTime * rotateSpeed);
+
+                //transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), 1);
                 Debug.Log("Terminou de girar :)");
                 playerScript.CanFall = true;
                 playerScript.AbleToRotate = false;
@@ -66,11 +94,11 @@ public class ScenarioController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && playerScript.InGround)
         {
             Rotation("clockwise");
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && playerScript.InGround)
         {
             Rotation("anticlockwise");
         }
@@ -90,5 +118,10 @@ public class ScenarioController : MonoBehaviour
             StartCoroutine(RotateWalls(90));
 
         }
+    }
+
+    public void DoubleRotation()
+    {
+        StartCoroutine(RotateWalls(180));
     }
 }

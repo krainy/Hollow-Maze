@@ -9,7 +9,10 @@ public class AccessibilityController : MonoBehaviour
     [SerializeField] GameObject gameControllerScript;
     [SerializeField] Slider zoomSlider;
 
-    [SerializeField] Transform cameraTransform;
+    [SerializeField] Camera cameraObject;
+
+    float cameraZoom;
+    
 
     IEnumerator DroppinCoroutine(){
         gameImage.SetActive(false);
@@ -38,10 +41,14 @@ public class AccessibilityController : MonoBehaviour
     public void zoomChange(){
         Debug.Log("Mudando o zoom da camera!");
 
-        float cameraZoom = -15f + (zoomSlider.value * 10f);
+        cameraZoom = 13.5f - (zoomSlider.value * 9f);
 
         gameControllerScript.GetComponent<SaveGameOptions>().CameraDistance = cameraZoom;
 
-        cameraTransform.position = new Vector3(cameraTransform.position.x, cameraTransform.position.y, cameraZoom);
+        cameraObject.orthographicSize = cameraZoom;
+    }
+
+    public void boolChange(){
+        gameControllerScript.GetComponent<SaveGameOptions>().LerpCamera = !gameControllerScript.GetComponent<SaveGameOptions>().LerpCamera;
     }
 }

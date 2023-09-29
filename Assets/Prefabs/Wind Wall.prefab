@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5320371159646105000}
   - component: {fileID: 5320371159646104997}
   - component: {fileID: 5320371159646105002}
-  - component: {fileID: 5320371159646105003}
   m_Layer: 0
   m_Name: wind
   m_TagString: Untagged
@@ -27,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320371159646105001}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 5.12, y: 1.17, z: -7.5292025}
-  m_LocalScale: {x: 0.6, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5320371160235393409}
@@ -107,21 +106,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &5320371159646105003
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5320371159646105001}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: fdaa4d1b5080f4240a10983ea929c326, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &5320371159927992331
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +117,6 @@ GameObject:
   - component: {fileID: 5320371159927992330}
   - component: {fileID: 5320371159927992327}
   - component: {fileID: 5320371159927992324}
-  - component: {fileID: 5320371159927992325}
   m_Layer: 0
   m_Name: wind 2
   m_TagString: Untagged
@@ -149,8 +132,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320371159927992331}
   m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 5.12, y: 2.84, z: -7.5292025}
-  m_LocalScale: {x: 0.6, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0.45, y: 2.76, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5320371160235393409}
@@ -229,21 +212,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &5320371159927992325
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5320371159927992331}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: b4e17695ddb217048ab76aed3912c4ef, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &5320371160235393415
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +222,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5320371160235393409}
   - component: {fileID: 5320371160235393414}
+  - component: {fileID: -7932002719377291215}
+  - component: {fileID: 5462719225915170265}
   m_Layer: 0
   m_Name: Wind Wall
   m_TagString: Untagged
@@ -269,8 +239,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320371160235393415}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.99, y: -2.1499999, z: 0.0670228}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5320371159646105000}
@@ -330,3 +300,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-7932002719377291215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5320371160235393415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a20e1a05360fe14f919783ff9456ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallElement: 2
+  playerPowerup: {fileID: 0}
+  scenario: {fileID: 0}
+--- !u!70 &5462719225915170265
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5320371160235393415}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.17843692, y: 1.3176858}
+  m_Size: {x: 0.4176445, y: 6.325652}
+  m_Direction: 0

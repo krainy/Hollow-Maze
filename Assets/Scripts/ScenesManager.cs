@@ -5,7 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
+    IEnumerator LoadAsynchronously(string scene){
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 
+        while(!operation.isDone){
+            Debug.Log(operation.progress);
+            yield return null;
+        }
+
+    }
 
     [SerializeField] List<string> scenes = new List<string>();
     
@@ -14,8 +22,8 @@ public class ScenesManager : MonoBehaviour
 
     }
 
-    public void sceneLoad(string sceneName)
+    public void sceneLoadAsync(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadAsynchronously(sceneName));
     }
 }

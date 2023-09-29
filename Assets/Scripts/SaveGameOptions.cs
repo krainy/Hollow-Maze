@@ -9,8 +9,15 @@ public class SaveGameOptions : MonoBehaviour
     /// ACCESSIBILITY OPTIONS
     /// </summary>
     [SerializeField] float cameraDistance;
+    [SerializeField] bool lerpCamera = false;
+    public bool LerpCamera
+    {
+        get { return lerpCamera; }
+        set { lerpCamera = value; }
+    }
     public float CameraDistance
     {
         set { cameraDistance = value; }
+        get { return cameraDistance; }
     }
 }
