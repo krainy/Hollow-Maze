@@ -31,7 +31,7 @@ public class PlayerPowerupController : MonoBehaviour
 
     IEnumerator SetPowerup()
     {
-        Debug.Log("Setting power up");
+        Debug.Log("Setting power up: " + element);
         if (hasPowerup && canGetPowerUp)
         {
             canGetPowerUp = false;

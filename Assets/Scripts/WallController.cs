@@ -13,13 +13,13 @@ public class WallController : MonoBehaviour
     /// </summary>
     [SerializeField] [Tooltip("0 = Nenhum 1 = Fogo 2 = Vento 3 = Agua 4 = Terra.")] int wallElement = 0;
 
-    [SerializeField] PlayerPowerupController playerPowerup;
+    [SerializeField] GameObject playerObj;
     [SerializeField] ScenarioController scenario;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerPowerup = GameObject.Find("weeee").GetComponent<PlayerPowerupController>();
+        playerObj = GameObject.Find("weeee");
         scenario = GameObject.Find("Walls").GetComponent<ScenarioController>();
     }
 
@@ -31,10 +31,17 @@ public class WallController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.CompareTag("Player")){
-            if(playerPowerup.Element == wallElement){
-                playerPowerup.UsedElement();
+            if(playerObj.GetComponent<PlayerPowerupController>().Element == wallElement){
+                playerObj.GetComponent<PlayerPowerupController>().UsedElement();
                 Destroy(this);
-            } else {
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collider){
+        if(collider.gameObject.CompareTag("Player")){
+            if(playerObj.GetComponent<PlayerPowerupController>().Element != wallElement && playerObj.GetComponent<PlayerController>().InGround){
+                playerObj.GetComponent<PlayerController>().ElementalContact = true;
                 scenario.DoubleRotation();
             }
         }

@@ -20,12 +20,14 @@ public class ScenarioController : MonoBehaviour
     {
         rotating = true;
 
+        //playerScript.CanJump = true;
         float iniRotate = this.transform.localRotation.eulerAngles.z;
-        int rotateSide = rotation / 90;
+        int rotateSide = Mathf.Abs(rotation) / rotation;
+        int rotateMagnitude = Mathf.Abs(rotation / 90);
 
         if (rotation != 180)
         {
-            playerScript.CanJump = true;
+            //playerScript.CanJump = true;
             Quaternion target = Quaternion.Euler(this.transform.localRotation.eulerAngles.x, this.transform.localRotation.eulerAngles.y, this.transform.localRotation.eulerAngles.z + rotation);
 
             if (iniRotate + rotation < 0)
@@ -40,56 +42,43 @@ public class ScenarioController : MonoBehaviour
             Debug.Log("Rotação inicial: " + iniRotate);
             Debug.Log("Rotação final: " + (iniRotate + rotation));
 
-            while (!playerScript.AbleToRotate)
-            {
-                yield return new WaitForEndOfFrame();
-            }
         }
 
-
-        while ((int)this.transform.localRotation.eulerAngles.z != iniRotate + rotation)
+        while (!playerScript.AbleToRotate)
         {
-            Debug.Log("Ta girando");
-            //Debug.Log((int)this.transform.localRotation.eulerAngles.z);
-            //transform.rotateAround = Quaternion.Lerp(transform.rotation, target, Time.deltaTime * rotateSpeed);
-            transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), Time.deltaTime * rotateSpeed);
-            if (Mathf.Abs((iniRotate + rotation) - this.transform.localRotation.eulerAngles.z) < Time.deltaTime * rotateSpeed)
-            {
-
-                //Debug.Log(Mathf.RoundToInt(Mathf.Abs(this.transform.localRotation.eulerAngles.z) / 90));
-
-                //Debug.Log(this.transform.localRotation.eulerAngles.z);
-
-                int gambiarra = Mathf.RoundToInt(Mathf.Abs(this.transform.localRotation.eulerAngles.z) / this.transform.localRotation.eulerAngles.z);
-
-                Debug.Log(Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90) * 90);
-
-                transform.localRotation = Quaternion.Euler(0f, 0f, Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90) * 90);
-                if (this.transform.localRotation.eulerAngles.z >= (this.transform.localRotation.eulerAngles.z / 90) * 90)
-                {
-                }
-                else
-                {
-
-                }
-
-                //transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), Time.deltaTime * rotateSpeed);
-
-                //transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), 1);
-                Debug.Log("Terminou de girar :)");
-                playerScript.CanFall = true;
-                playerScript.AbleToRotate = false;
-                rotating = false;
-                StopAllCoroutines();
-                yield return null;
-            }
+            Debug.Log("Esperando poder rotacionar o mundo!!!");
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log("Terminou de girar :)");
-        rotating = false;
-        yield return null;
+        for (float i = 0; i < 90; i += rotateSpeed * Time.deltaTime)
+        {
 
+            transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, (1f * rotateSide)), Time.deltaTime * rotateSpeed * rotateMagnitude);
+            yield return new WaitForEndOfFrame();
+
+        }
+
+        Debug.Log("Terminando de girar");
+
+        //int gambiarra = Mathf.RoundToInt(Mathf.Abs(this.transform.localRotation.eulerAngles.z) / this.transform.localRotation.eulerAngles.z);
+
+        //transform.localRotation = Quaternion.Euler(0f, 0f, Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90) * 90);
+
+        //Teste com rotate around
+
+        int aux = Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90);
+        Debug.Log("aux = " + aux);
+        float quantofalta = (90 * aux) - this.transform.localRotation.eulerAngles.z;
+        Debug.Log("Quanto falta = " + quantofalta);
+
+        transform.RotateAround(playerGO.transform.position, new Vector3(0f, 0f, 1f), quantofalta);
+
+        Debug.Log("Terminou de girar :)");
+        playerScript.CanFall = true;
+        playerScript.AbleToRotate = false;
+        rotating = false;
+        StopAllCoroutines();
+        yield return null;
     }
 
     void Update()
@@ -108,12 +97,14 @@ public class ScenarioController : MonoBehaviour
     {
         if (side == "clockwise" && !rotating)
         {
+            rotating = true;
             playerScript.CanJump = true;
             StartCoroutine(RotateWalls(-90));
 
         }
         else if (side == "anticlockwise" && !rotating)
         {
+            rotating = true;
             playerScript.CanJump = true;
             StartCoroutine(RotateWalls(90));
 
@@ -122,6 +113,12 @@ public class ScenarioController : MonoBehaviour
 
     public void DoubleRotation()
     {
-        StartCoroutine(RotateWalls(180));
+        if (!rotating)
+        {
+            rotating = true;
+
+            StartCoroutine(RotateWalls(180));
+
+        }
     }
 }

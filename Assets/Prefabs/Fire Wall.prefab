@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3797605636567707894}
   - component: {fileID: 3797605636567707893}
   - component: {fileID: 3797605636567707892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: burning_loop_3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,10 +116,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3797605637247642332}
   - component: {fileID: 3797605637247642335}
+  - component: {fileID: 1353067685716966187}
   - component: {fileID: 297766563}
   - component: {fileID: 297766565}
   - component: {fileID: 297766562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +196,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1353067685716966187
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797605637247642334}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.1040511}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.50930977, y: 3.7754622}
+  m_EdgeRadius: 0
 --- !u!70 &297766563
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallElement: 1
-  playerPowerup: {fileID: 0}
+  playerObj: {fileID: 0}
   scenario: {fileID: 0}
 --- !u!1 &3797605637755887357
 GameObject:
@@ -258,7 +285,7 @@ GameObject:
   - component: {fileID: 3797605637755887354}
   - component: {fileID: 3797605637755887353}
   - component: {fileID: 3797605637755887352}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: burning_loop_3_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

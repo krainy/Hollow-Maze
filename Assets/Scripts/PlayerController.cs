@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
         set { canFall = value; }
     }
     [SerializeField] float jumpForce = 1f;
+    [SerializeField] bool elementalWall = false;
+    public bool ElementalContact
+    {
+        set { elementalWall = value; }
+    }
 
     void AfterJump()
     {
@@ -114,10 +119,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gambiarra && !jumped && inGround)
+        if ((gambiarra && !jumped && inGround) || (inGround && elementalWall && !jumped))
         {
-            anim.SetBool("isJumping", true);
-            gambiarra = false;
+            jumped = true;
+
             Jump();
 
             Debug.Log("Pulando");
@@ -131,6 +136,7 @@ public class PlayerController : MonoBehaviour
             playerRB.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
             Debug.Log("Velocidade zerada");
             playerRB.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+            elementalWall = false;
             ableToRotate = true;
             Debug.Log("Liberado para rodar!");
         }
@@ -147,8 +153,10 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
 
+        anim.SetBool("isJumping", true);
+        gambiarra = false;
+        elementalWall = false;
         playerRB.AddForce(transform.up * jumpForce);
-        jumped = true;
 
     }
 

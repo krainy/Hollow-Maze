@@ -7,10 +7,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] Transform target;
     [SerializeField] Transform cameraTransform;
-    [SerializeField]
-    Camera camera;
-
-
+    [SerializeField] Camera cameraOBJ;
     [SerializeField] GameObject GameController;
     [SerializeField] Transform mazeWalls;
 
@@ -42,9 +39,9 @@ public class CameraController : MonoBehaviour
             }
             if (GameController.GetComponent<SaveGameOptions>().CameraDistance > 1)
             {
-                camera.orthographicSize = GameController.GetComponent<SaveGameOptions>().CameraDistance;
+                cameraOBJ.orthographicSize = GameController.GetComponent<SaveGameOptions>().CameraDistance;
             } else {
-                camera.orthographicSize = 1f;
+                cameraOBJ.orthographicSize = 1f;
             }
 
 
