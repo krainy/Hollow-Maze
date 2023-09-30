@@ -16,14 +16,13 @@ public class ScenesManager : MonoBehaviour
     }
 
     [SerializeField] List<string> scenes = new List<string>();
-    
-    void Start()
-    {
-
-    }
 
     public void sceneLoadAsync(string sceneName)
     {
         StartCoroutine(LoadAsynchronously(sceneName));
+    }
+
+    public static void ExitGame(){
+        Application.Quit();
     }
 }

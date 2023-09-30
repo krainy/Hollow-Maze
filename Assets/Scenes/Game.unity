@@ -641,7 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1051165878}
   cameraTransform: {fileID: 519420032}
-  cameraOBJ: {fileID: 0}
+  cameraOBJ: {fileID: 519420031}
   GameController: {fileID: 0}
   mazeWalls: {fileID: 390115497}
 --- !u!1 &697847692
@@ -947,7 +947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051165874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 7.91, z: 0}
+  m_LocalPosition: {x: 9.42, y: -0.695, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   livesLeft: 3
   canTakeDamage: 1
+  objectForSceneChange: {fileID: 454339304}
 --- !u!114 &1051165883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2168,11 +2169,19 @@ PrefabInstance:
       objectReference: {fileID: 1051165883}
     - target: {fileID: 297766563, guid: e9aa596917e744f42a408852d9c4e365, type: 3}
       propertyPath: m_Size.x
-      value: 0.74669266
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 297766563, guid: e9aa596917e744f42a408852d9c4e365, type: 3}
+      propertyPath: m_Size.y
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 297766563, guid: e9aa596917e744f42a408852d9c4e365, type: 3}
       propertyPath: m_Offset.x
-      value: -0.011213303
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 297766563, guid: e9aa596917e744f42a408852d9c4e365, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 3797605637247642332, guid: e9aa596917e744f42a408852d9c4e365, type: 3}
       propertyPath: m_RootOrder
@@ -3015,7 +3024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642607154322701407, guid: 324ecf24bfb48ca46ba512f07102e5e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 3642607154322701407, guid: 324ecf24bfb48ca46ba512f07102e5e7, type: 3}
       propertyPath: m_LocalPosition.z

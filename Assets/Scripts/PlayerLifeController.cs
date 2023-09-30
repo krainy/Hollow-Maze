@@ -18,6 +18,8 @@ public class PlayerLifeController : MonoBehaviour
         set { canTakeDamage = value; }
     }
 
+    [SerializeField] ButtonForScenes objectForSceneChange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,7 @@ public class PlayerLifeController : MonoBehaviour
     {
         if (livesLeft <= 0)
         {
-            ButtonForScenes.CallScene("GameOver");
+            objectForSceneChange.CallScene("GameOver");
         }
     }
 }

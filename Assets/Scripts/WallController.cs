@@ -32,8 +32,9 @@ public class WallController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.CompareTag("Player")){
             if(playerObj.GetComponent<PlayerPowerupController>().Element == wallElement){
+                Debug.Log("Tem o mesmo elemento!");
                 playerObj.GetComponent<PlayerPowerupController>().UsedElement();
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }
