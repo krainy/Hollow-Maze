@@ -20,7 +20,7 @@ public class WallController : MonoBehaviour
     void Start()
     {
         playerObj = GameObject.Find("weeee");
-        scenario = GameObject.Find("Walls").GetComponent<ScenarioController>();
+        scenario = GameObject.Find("Maze").GetComponent<ScenarioController>();
     }
 
     // Update is called once per frame
