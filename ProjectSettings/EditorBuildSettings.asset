@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: e7f058e7208a8054bbd0b7267172a50c
   - enabled: 1
     path: Assets/Scenes/Game.unity
-    guid: 051a47ae2d00447499c77bd2a9448cff
+    guid: 341578d544d6b3a4ea3a140a874ba944
   - enabled: 1
     path: Assets/Scenes/LevelWin.unity
     guid: 7f9d6225247a17c41acd1f1909a11cf1

@@ -60,12 +60,6 @@ public class ScenarioController : MonoBehaviour
 
         Debug.Log("Terminando de girar");
 
-        //int gambiarra = Mathf.RoundToInt(Mathf.Abs(this.transform.localRotation.eulerAngles.z) / this.transform.localRotation.eulerAngles.z);
-
-        //transform.localRotation = Quaternion.Euler(0f, 0f, Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90) * 90);
-
-        //Teste com rotate around
-
         int aux = Mathf.RoundToInt(this.transform.localRotation.eulerAngles.z / 90);
         Debug.Log("aux = " + aux);
         float quantofalta = (90 * aux) - this.transform.localRotation.eulerAngles.z;

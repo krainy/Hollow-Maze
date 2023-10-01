@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] Animator anim;
     [SerializeField] PlayerPowerupController playerPowerup;
     [SerializeField] GameObject checkGround;
@@ -73,11 +72,6 @@ public class PlayerController : MonoBehaviour
 
         playerRB.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         yield return null;
-    }
-
-    void Start()
-    {
-
     }
 
     void Update()
@@ -173,4 +167,5 @@ public class PlayerController : MonoBehaviour
             inGround = false;
         }
     }
+    
 }
