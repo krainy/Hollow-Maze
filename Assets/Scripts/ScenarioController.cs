@@ -110,6 +110,7 @@ public class ScenarioController : MonoBehaviour
         if (!rotating)
         {
             rotating = true;
+            playerScript.CanJump = true;
 
             StartCoroutine(RotateWalls(180));
 

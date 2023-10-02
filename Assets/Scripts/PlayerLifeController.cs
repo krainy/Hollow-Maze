@@ -18,6 +18,12 @@ public class PlayerLifeController : MonoBehaviour
         set { canTakeDamage = value; }
     }
 
+    [SerializeField] GameObject heart1;
+    [SerializeField] GameObject heart2;
+    [SerializeField] GameObject heart3;
+
+    [SerializeField] GameObject playerObj;
+
     [SerializeField] ButtonForScenes objectForSceneChange;
 
     // Start is called before the first frame update
@@ -33,5 +39,42 @@ public class PlayerLifeController : MonoBehaviour
         {
             objectForSceneChange.CallScene("GameOver");
         }
+
+        if (playerObj.GetComponent<PlayerController>().InGround)
+        {
+            canTakeDamage = true;
+        }
+
+    }
+
+    public void takesDamage()
+    {
+
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+            livesLeft -= 1;
+
+            switch (livesLeft)
+            {
+                case 3:
+                    heart1.SetActive(true);
+                    heart2.SetActive(true);
+                    heart3.SetActive(true);
+                    break;
+                case 2:
+                    heart1.SetActive(true);
+                    heart2.SetActive(true);
+                    heart3.SetActive(false);
+                    break;
+                case 1:
+                    heart1.SetActive(true);
+                    heart2.SetActive(false);
+                    heart3.SetActive(false);
+                    break;
+            }
+
+        }
+
     }
 }

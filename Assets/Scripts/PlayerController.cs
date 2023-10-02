@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Animator anim;
-    [SerializeField] PlayerPowerupController playerPowerup;
+    [SerializeField] DEMOPlayerPowerup playerPowerup;
     [SerializeField] GameObject checkGround;
     [SerializeField] LayerMask layerGround;
     [SerializeField] bool inGround;
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     }
     [SerializeField] Animator playerAnim;
     [SerializeField] Rigidbody2D playerRB;
+    [SerializeField] bool strongImpact = false;
     [SerializeField] bool gambiarra = true;
     [SerializeField]
     public bool CanJump
@@ -64,18 +65,35 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Falling()
     {
+        canFall = false;
         anim.SetBool("isJumping", false);
         playerRB.gravityScale = 1;
-        canFall = false;
         jumped = false;
         //anim
 
         playerRB.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+
+        yield return null;
+    }
+
+    IEnumerator StrongImpact()
+    {
+        if (playerRB.velocity.y <= -20f)
+        {
+            strongImpact = true;
+            yield return null;
+        } else if (!inGround){
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(StrongImpact());
+        }
+
         yield return null;
     }
 
     void Update()
     {
+        toCheckGround();
+
         switch (playerPowerup.Element)
         {
             case 0:
@@ -113,7 +131,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if ((gambiarra && !jumped && inGround) || (inGround && elementalWall && !jumped))
+        if ((gambiarra && !jumped && inGround))
         {
             jumped = true;
 
@@ -137,10 +155,12 @@ public class PlayerController : MonoBehaviour
 
         if (canFall)
         {
+            canFall = false;
             StartCoroutine(Falling());
+            StartCoroutine(StrongImpact());
         }
 
-        toCheckGround();
+
 
     }
 
@@ -158,14 +178,24 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, layerGround))
         {
-            //anim.SetBool("isJumping", false);
             inGround = true;
+
+            if (strongImpact)
+            {
+                strongImpact = false;
+                Debug.Log("Soltou animação de ventinho");
+            }
+
+            //anim.SetBool("isJumping", false);
+
         }
         else
         {
             //anim.SetBool("isJumping", true);
             inGround = false;
+
         }
+
     }
-    
+
 }

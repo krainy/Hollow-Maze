@@ -11,7 +11,7 @@ public class WallController : MonoBehaviour
     ///3 = Agua
     ///4 = Terra
     /// </summary>
-    [SerializeField] [Tooltip("0 = Nenhum 1 = Fogo 2 = Vento 3 = Agua 4 = Terra.")] int wallElement = 0;
+    [SerializeField][Tooltip("0 = Nenhum 1 = Fogo 2 = Vento 3 = Agua 4 = Terra.")] int wallElement = 0;
 
     [SerializeField] GameObject playerObj;
     [SerializeField] ScenarioController scenario;
@@ -29,21 +29,35 @@ public class WallController : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        if(collider.gameObject.CompareTag("Player")){
-            if(playerObj.GetComponent<PlayerPowerupController>().Element == wallElement){
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            if (playerObj.GetComponent<DEMOPlayerPowerup>().Element == wallElement)
+            {
                 Debug.Log("Tem o mesmo elemento!");
-                playerObj.GetComponent<PlayerPowerupController>().UsedElement();
+                //playerObj.GetComponent<DEMOPlayerPowerup>().UsedElement();
+                playerObj.GetComponent<DEMOPlayerPowerup>().Element = 0;
+
+
                 Destroy(this.gameObject);
+            }
+            else
+            {
+                playerObj.GetComponent<PlayerLifeController>().takesDamage();
             }
         }
     }
 
-    void OnTriggerStay2D(Collider2D collider){
-        if(collider.gameObject.CompareTag("Player")){
-            if(playerObj.GetComponent<PlayerPowerupController>().Element != wallElement && playerObj.GetComponent<PlayerController>().InGround){
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            if (playerObj.GetComponent<DEMOPlayerPowerup>().Element != wallElement && playerObj.GetComponent<PlayerController>().InGround && playerObj.GetComponent<Rigidbody2D>().velocity.y == 0)
+            {
                 playerObj.GetComponent<PlayerController>().ElementalContact = true;
                 scenario.DoubleRotation();
+
             }
         }
     }

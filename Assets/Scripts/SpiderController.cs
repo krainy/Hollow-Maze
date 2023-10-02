@@ -5,8 +5,9 @@ using UnityEngine;
 public class SpiderController : MonoBehaviour
 {
 
-    [SerializeField] PlayerLifeController playerLife;
-    [SerializeField] PlayerPowerupController playerPowerUp;
+    [SerializeField] GameObject playerObj;
+    //[SerializeField] PlayerLifeController playerLife;
+    //[SerializeField] PlayerPowerupController playerPowerUp;
 
     // Start is called before the first frame update
     void Start()
@@ -22,20 +23,29 @@ public class SpiderController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("Player")){
-            if(playerLife.CanTakeDamage){
-                playerLife.CanTakeDamage = false;
-                playerPowerUp.HasPowerUp = true;
+        if (collider.gameObject.CompareTag("Player"))
+        {
+
+            if (playerObj.GetComponent<DEMOPlayerPowerup>().Element == 0)
+            {
+                playerObj.GetComponent<DEMOPlayerPowerup>().Element = 1;
             }
+
+            if (playerObj.GetComponent<Rigidbody2D>().velocity.y <= -20)
+            {
+                Debug.Log("Matou a aranha rapá");
+
+                playerObj.GetComponent<DEMOPlayerPowerup>().Killer = 1;
+
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Debug.Log("Né que chegou sem matar a aranha, congratulaixons!");
+
+            }
+
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if(collider.gameObject.CompareTag("Player")){
-            if(!playerLife.CanTakeDamage){
-                playerLife.CanTakeDamage = true;
-            }
-        }
-    }
 }
