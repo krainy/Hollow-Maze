@@ -1323,7 +1323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128b631bb28a7e479e1429b8319c0d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes: []
   GameController: {fileID: 0}
 --- !u!1 &1196593218
 GameObject:
@@ -2456,10 +2455,10 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195972322}
-        m_TargetAssemblyTypeName: ButtonForScenes, Assembly-CSharp
-        m_MethodName: CallScene
-        m_Mode: 5
+      - m_Target: {fileID: 1195972317}
+        m_TargetAssemblyTypeName: AccessibilityController, Assembly-CSharp
+        m_MethodName: boolChange
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
