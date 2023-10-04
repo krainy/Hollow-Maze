@@ -562,7 +562,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104239896}
         m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
-        m_MethodName: sceneLoadAsync
+        m_MethodName: sceneLoadAdditive
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -892,6 +892,7 @@ GameObject:
   - component: {fileID: 1104239893}
   - component: {fileID: 1104239895}
   - component: {fileID: 1104239896}
+  - component: {fileID: 1104239897}
   m_Layer: 0
   m_Name: GameController
   m_TagString: gameController
@@ -953,6 +954,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes: []
+--- !u!114 &1104239897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104239892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e74571f686ba145a0bd2720ad667b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameIsPaused: 0
 --- !u!1 &1131356165
 GameObject:
   m_ObjectHideFlags: 0
