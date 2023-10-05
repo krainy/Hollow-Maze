@@ -27,7 +27,7 @@ public class ResolutionsController : MonoBehaviour
         {
             //g_ResolutionValues.Add("Width");
             TMP_Dropdown.OptionData newRes = new TMP_Dropdown.OptionData();
-            newRes.text = res.width + "x" + res.height;
+            newRes.text = res.width + "x" + res.height + ", " + res.refreshRate + "hz";
 
             resDropdown.options.Add(newRes);
             if (res.width == Screen.width)

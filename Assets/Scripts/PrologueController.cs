@@ -10,6 +10,7 @@ public class PrologueController : MonoBehaviour
     [SerializeField][Tooltip("In Seconds")] int timeToFadeIn = 1;
     [SerializeField][Tooltip("In Seconds")] int timeBetweenFadeIn = 2;
     [SerializeField][Tooltip("In Seconds")] int timeToStartGame = 10;
+    bool anyKeyDown = false;
 
     IEnumerator StartGame()
     {
@@ -60,10 +61,13 @@ public class PrologueController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.anyKey)
+        if (Input.anyKeyDown && !anyKeyDown)
         {
+            Debug.Log("Pulou a introducao msm vei");
+
+            anyKeyDown = true;
 
             gameController.GetComponent<ScenesManager>().sceneLoadAsync("Game");
         }
