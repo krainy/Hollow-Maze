@@ -17,11 +17,13 @@ public class PauseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && gameIsPaused)
+        Debug.Log(SceneManager.sceneCount);
+
+        if (Input.GetKeyDown(this.GetComponent<KeyConfigController>().KeysList[3]) && gameIsPaused)
         {
             ReleaseGame();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && !gameIsPaused)
+        else if (Input.GetKeyDown(this.GetComponent<KeyConfigController>().KeysList[3]) && !gameIsPaused)
         {
             PausedGame();
         }
@@ -31,7 +33,7 @@ public class PauseController : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Game")
+        if (scene.name == "Game" && SceneManager.sceneCount < 2)
         {
             gameIsPaused = !gameIsPaused;
             Time.timeScale = 0;
@@ -44,12 +46,19 @@ public class PauseController : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Game")
+        if (scene.name == "Game" && SceneManager.sceneCount == 2)
         {
             SceneManager.UnloadSceneAsync("Pause");
             gameIsPaused = !gameIsPaused;
             Time.timeScale = 1;
         }
 
+    }
+
+    public void ReleaseGameByChangeScene()
+    {
+        SceneManager.UnloadSceneAsync("Pause");
+        gameIsPaused = !gameIsPaused;
+        Time.timeScale = 1;
     }
 }

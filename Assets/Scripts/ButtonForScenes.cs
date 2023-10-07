@@ -36,7 +36,7 @@ public class ButtonForScenes : MonoBehaviour
     public void ReleaseGame(){
         GameController = GameObject.Find("GameController");
 
-        GameController.GetComponent<PauseController>().ReleaseGame();
+        GameController.GetComponent<PauseController>().ReleaseGameByChangeScene();
     }
 
     

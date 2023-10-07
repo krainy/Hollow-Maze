@@ -36,6 +36,8 @@ public class CameraController : MonoBehaviour
                 Quaternion mazeRotation = Quaternion.Euler(cameraTransform.rotation.x, cameraTransform.rotation.y, mazeWalls.rotation.z);
 
                 this.cameraTransform.rotation = Quaternion.Lerp(transform.rotation, mazeWalls.rotation, 1);
+            } else {
+                this.cameraTransform.rotation = Quaternion.Euler(0, 0, 0);
             }
             if (GameController.GetComponent<SaveGameOptions>().CameraDistance > 1)
             {

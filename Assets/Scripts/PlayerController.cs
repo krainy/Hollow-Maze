@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] DEMOPlayerPowerup playerPowerup;
     [SerializeField] GameObject checkGround;
+    [SerializeField] GameObject scenarioObj;
     [SerializeField] LayerMask layerGround;
     [SerializeField] bool inGround;
     public bool InGround
@@ -82,7 +83,9 @@ public class PlayerController : MonoBehaviour
         {
             strongImpact = true;
             yield return null;
-        } else if (!inGround){
+        }
+        else if (!inGround)
+        {
             yield return new WaitForEndOfFrame();
             StartCoroutine(StrongImpact());
         }
@@ -178,6 +181,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, layerGround))
         {
+            if (!inGround)
+            {
+                scenarioObj.GetComponent<ScenarioController>().ToFreeRotation();
+            }
+
             inGround = true;
 
             if (strongImpact)

@@ -21,8 +21,6 @@ public class OptionsMenuController : MonoBehaviour
     public void ChangeScreen(int screenIndex)
     {
 
-        Debug.Log("g");
-
         foreach(GameObject screen in optionsScreens){
             screen.GetComponent<Camera>().depth = -1;
         }

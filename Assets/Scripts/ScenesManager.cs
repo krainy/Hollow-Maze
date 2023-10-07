@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
+
     IEnumerator LoadAsynchronously(string scene){
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 
@@ -23,6 +24,10 @@ public class ScenesManager : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    void Awake(){
+        sceneLoadAsync("NewGameMenu");
     }
 
     [SerializeField] List<string> scenes = new List<string>();

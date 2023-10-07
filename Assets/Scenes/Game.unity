@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Game Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,6 +586,7 @@ MonoBehaviour:
   anim: {fileID: 1051165879}
   playerPowerup: {fileID: 1051165885}
   checkGround: {fileID: 1881830344}
+  scenarioObj: {fileID: 8816751703105595088}
   layerGround:
     serializedVersion: 2
     m_Bits: 64
@@ -857,7 +858,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -114, y: 359}
+  m_AnchoredPosition: {x: -114, y: -50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1721687756
@@ -1176,3 +1177,8 @@ PrefabInstance:
       objectReference: {fileID: 1051165874}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f440cbb648eca4cb540f5ef279c7d3, type: 3}
+--- !u!1 &8816751703105595088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8816751701378363816, guid: 26f440cbb648eca4cb540f5ef279c7d3, type: 3}
+  m_PrefabInstance: {fileID: 8816751703105595087}
+  m_PrefabAsset: {fileID: 0}

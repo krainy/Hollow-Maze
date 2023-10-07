@@ -61,7 +61,7 @@ public class PrologueController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.anyKeyDown && !anyKeyDown)
         {

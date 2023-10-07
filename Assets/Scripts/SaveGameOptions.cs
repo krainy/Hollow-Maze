@@ -15,6 +15,13 @@ public class SaveGameOptions : MonoBehaviour
         get { return lerpCamera; }
         set { lerpCamera = value; }
     }
+    [SerializeField] bool useJoystickAxis = false;
+    public bool UseJoystickAxis
+    {
+        get { return useJoystickAxis; }
+        set { useJoystickAxis = value; }
+    }
+
     public float CameraDistance
     {
         set { cameraDistance = value; }
