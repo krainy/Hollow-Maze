@@ -6,11 +6,18 @@ public class MinimapController : MonoBehaviour
 {
     
     [SerializeField] GameObject miniMap;
+    GameObject GameController;
+
+    void Start(){
+        if(GameController == null){
+            GameController = GameObject.Find("GameController");
+        }
+    }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Tab)){
+        if(Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[2])){
             miniMap.SetActive(true);
-        } else if (Input.GetKeyUp(KeyCode.Tab)){
+        } else if (Input.GetKeyUp(GameController.GetComponent<KeyConfigController>().KeysList[2])){
             miniMap.SetActive(false);
         } 
     }

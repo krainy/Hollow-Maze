@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewGameMenuController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class NewGameMenuController : MonoBehaviour
     [SerializeField] int buttonIndex = 0;
 
     [SerializeField] GameObject GameController;
+
+    bool gerson = true;
 
     void Start()
     {
@@ -33,20 +36,40 @@ public class NewGameMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) && buttonIndex < buttons.Length - 1)
+        if (SceneManager.sceneCount < 2)
         {
-            buttonIndex++;
-            ChangeButtonByInt();
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && buttonIndex > 0)
-        {
-            buttonIndex--;
-            ChangeButtonByInt();
-        }
+            if (Input.GetAxis("Joystick Selection") == -1 && gerson && buttonIndex < buttons.Length - 1)
+            {
+                gerson = false;
+                buttonIndex++;
+                ChangeButtonByInt();
+            }
+            else if (Input.GetAxis("Joystick Selection") == 1 && gerson && buttonIndex > 0)
+            {
+                gerson = false;
+                buttonIndex--;
+                ChangeButtonByInt();
+            }
+            if (Input.GetAxis("Joystick Selection") == 0)
+            {
+                gerson = true;
+            }
 
-        if (Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[4]))
-        {
-            EnterScene();
+            if (Input.GetKeyDown(KeyCode.DownArrow) && buttonIndex < buttons.Length - 1)
+            {
+                buttonIndex++;
+                ChangeButtonByInt();
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && buttonIndex > 0)
+            {
+                buttonIndex--;
+                ChangeButtonByInt();
+            }
+
+            if (Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[4]))
+            {
+                EnterScene();
+            }
         }
     }
 

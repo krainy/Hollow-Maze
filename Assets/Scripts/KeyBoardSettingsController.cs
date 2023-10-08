@@ -10,13 +10,18 @@ public class KeyBoardSettingsController : MonoBehaviour
 
     [SerializeField] GameObject GameController;
 
+    bool usingJoystick = false;
+
     // Start is called before the first frame update
     void Start()
     {
+
         if (GameController == null)
         {
             GameController = GameObject.Find("GameController");
         }
+
+        StartCoroutine(CheckAtualInput());
 
         int keysIndex = 0;
         foreach (KeyCode key in GameController.GetComponent<KeyConfigController>().KeysList)
@@ -24,12 +29,6 @@ public class KeyBoardSettingsController : MonoBehaviour
             keysText[keysIndex].text = key.ToString();
             keysIndex++;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator ChangingKey(TMP_Text buttonText)
@@ -53,14 +52,29 @@ public class KeyBoardSettingsController : MonoBehaviour
     {
         buttonText.text = "Press any key";
 
-
-
         StartCoroutine("ChangingKey", buttonText);
     }
 
     public void ChangeValue(int keyIndex)
     {
         GameController.GetComponent<KeyConfigController>().ChangeValue(keyIndex);
+    }
+
+    IEnumerator CheckAtualInput()
+    {
+        if (GameController.GetComponent<KeyConfigController>().UsingJoystick != usingJoystick)
+        {
+            usingJoystick = !usingJoystick;
+            int keysIndex = 0;
+            foreach (KeyCode key in GameController.GetComponent<KeyConfigController>().KeysList)
+            {
+                keysText[keysIndex].text = key.ToString();
+                keysIndex++;
+            }
+        }
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(CheckAtualInput());
+
     }
 
 

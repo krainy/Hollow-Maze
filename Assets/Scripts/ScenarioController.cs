@@ -128,13 +128,13 @@ public class ScenarioController : MonoBehaviour
     {
         if (GameController.GetComponent<SaveGameOptions>().UseJoystickAxis)
         {
-            if (Mathf.Abs(Input.GetAxisRaw("JoyHorizontal")) / Input.GetAxisRaw("JoyHorizontal") > 0)
+            if (Mathf.Abs(Input.GetAxisRaw("JoyHorizontal")) / Input.GetAxisRaw("JoyHorizontal") < 0)
             {
                 GameController.GetComponent<KeyConfigController>().UsingJoystick = true;
                 Debug.Log("b");
                 Rotation("clockwise");
             }
-            else if ((Mathf.Abs(Input.GetAxisRaw("JoyHorizontal")) / Input.GetAxisRaw("JoyHorizontal")) < 0)
+            else if ((Mathf.Abs(Input.GetAxisRaw("JoyHorizontal")) / Input.GetAxisRaw("JoyHorizontal")) > 0)
             {
                 GameController.GetComponent<KeyConfigController>().UsingJoystick = true;
                 Rotation("anticlockwise");

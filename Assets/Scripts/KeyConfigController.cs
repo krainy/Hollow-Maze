@@ -5,7 +5,6 @@ using System;
 
 public class KeyConfigController : MonoBehaviour
 {
-
     [SerializeField] bool hasJoystick;
     public bool HasJoystick
     {
@@ -61,7 +60,8 @@ public class KeyConfigController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        usingKeyboard = true;
+        usingJoystick = false;
     }
 
     // Update is called once per frame
@@ -74,15 +74,13 @@ public class KeyConfigController : MonoBehaviour
         {
             WhichInput();
         }
-        else
+
+
+
+        if (Input.GetAxis("Joystick Selection") == 1 || Input.GetAxis("Joystick Selection") == -1)
         {
-            usingKeyboard = true;
-            usingJoystick = false;
+            Debug.Log("Up/Down");
         }
-
-
-
-
 
 
         /*if (Input.GetButton("Joystick X"))
@@ -117,13 +115,10 @@ public class KeyConfigController : MonoBehaviour
 
     void WhichInput()
     {
-        if (hasJoystick && !usingJoystick)
+        if (Input.GetAxis("Any Joystick Use") == 1 || Input.GetAxis("Any Joystick Use") == -1 || Input.GetAxis("Joystick Selection") == -1 || Input.GetAxis("Joystick Selection") == 1)
         {
-            if (Input.GetAxis("Any Joystick Use") == 1 || Input.GetAxis("Any Joystick Use") == -1)
-            {
-                usingKeyboard = false;
-                usingJoystick = true;
-            }
+            usingKeyboard = false;
+            usingJoystick = true;
         }
 
         if (Input.anyKeyDown)
@@ -138,20 +133,21 @@ public class KeyConfigController : MonoBehaviour
                         Debug.Log(usedKey);
                         if (usedKey.ToString().Contains("Joystick"))
                         {
-                            usingKeyboard = false;
-                            usingJoystick = true;
+                            if (!usingJoystick)
+                            {
+                                ChangeInput();
+                            }
                         }
                         else
                         {
-                            usingKeyboard = true;
-                            usingJoystick = false;
+                            if (usingJoystick)
+                            {
+                                ChangeInput();
+                            }
                         }
                         toChangeKey = true;
                     }
-
-
                 }
-
             }
         }
     }
@@ -177,6 +173,21 @@ public class KeyConfigController : MonoBehaviour
         Debug.Log("a");
         toChangeKey = false;
         StartCoroutine("ChangingValue", keyIndex);
+    }
+
+    void ChangeInput()
+    {
+        if (!usingJoystick)
+        {
+            usingKeyboard = false;
+            usingJoystick = true;
+        }
+        else if (usingJoystick)
+        {
+            usingKeyboard = true;
+            usingJoystick = false;
+        }
+
     }
 
     /*void OnGUI()

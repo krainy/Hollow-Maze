@@ -17,7 +17,6 @@ public class PauseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(SceneManager.sceneCount);
 
         if (Input.GetKeyDown(this.GetComponent<KeyConfigController>().KeysList[3]) && gameIsPaused)
         {

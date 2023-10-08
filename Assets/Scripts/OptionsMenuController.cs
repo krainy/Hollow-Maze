@@ -5,9 +5,16 @@ using UnityEngine;
 public class OptionsMenuController : MonoBehaviour
 {
     [SerializeField] GameObject[] optionsScreens;
+    int ScreenIndex = 0;
+
+    GameObject GameController;
 
     void Start()
     {
+        if(GameController == null){
+
+        GameController = GameObject.Find("GameController");
+        }
 
         optionsScreens[0].GetComponent<Camera>().depth = 1;
     }
@@ -15,16 +22,38 @@ public class OptionsMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[1]))
+        {
+            ScreenIndex--;
+            if(ScreenIndex < 0){
+                ScreenIndex = optionsScreens.Length - 1;
+            }
+            ChangeScreen(ScreenIndex);
+        }
+        else if (Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[0]))
+        {
+            ScreenIndex++;
+            if(ScreenIndex > optionsScreens.Length - 1){
+                ScreenIndex = 0;
+            }
+            ChangeScreen(ScreenIndex);
+        }
 
+        if(Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[3])){
+            ScenesManager.sceneUnloadThisScene();
+        }
     }
 
     public void ChangeScreen(int screenIndex)
     {
 
-        foreach(GameObject screen in optionsScreens){
+        ScreenIndex = screenIndex;
+
+        foreach (GameObject screen in optionsScreens)
+        {
             screen.GetComponent<Camera>().depth = -1;
         }
-        
+
         optionsScreens[screenIndex].GetComponent<Camera>().depth = 1;
 
         // foreach (GameObject screen in optionsScreens)
