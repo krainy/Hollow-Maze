@@ -7,6 +7,9 @@ using TMPro;
 public class ResolutionsController : MonoBehaviour
 {
 
+    [SerializeField] Toggle fullscreenToggle;
+
+    bool canChangeFullscreen = false;
 
     [SerializeField] Hashtable m_ResolutionValues = new Hashtable();
 
@@ -16,6 +19,8 @@ public class ResolutionsController : MonoBehaviour
 
     void Start()
     {
+        canChangeFullscreen = false;
+
         int resValue = 0;
 
         resDropdown = GetComponent<TMP_Dropdown>();
@@ -42,15 +47,30 @@ public class ResolutionsController : MonoBehaviour
 
         Debug.Log(Screen.width);
 
+        if (Screen.fullScreen)
+        {
+            fullscreenToggle.isOn = true;
+            canChangeFullscreen = true;
+        }
+        else
+        {
+            fullscreenToggle.isOn = false;
+            canChangeFullscreen = true;
+        }
+
     }
 
     public void ChangeFullscreen()
     {
-        Debug.Log("Fullscreen: " + Screen.fullScreen);
-        Screen.fullScreen = !Screen.fullScreen;
+        if (canChangeFullscreen)
+        {
+            Debug.Log("Fullscreen: " + Screen.fullScreen);
+            Screen.fullScreen = !Screen.fullScreen;
+        }
     }
 
-    public void ChangeResolution(){
+    public void ChangeResolution()
+    {
         Resolution[] m_Resolutions = Screen.resolutions;
 
         Screen.SetResolution(m_Resolutions[resDropdown.value].width, m_Resolutions[resDropdown.value].height, Screen.fullScreen);

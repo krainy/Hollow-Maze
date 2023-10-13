@@ -22,6 +22,9 @@ EditorBuildSettings:
     guid: e7f058e7208a8054bbd0b7267172a50c
   - enabled: 1
     path: Assets/Scenes/Game.unity
+    guid: 9e951b88682f7a34d9c31b0f55ee0233
+  - enabled: 1
+    path: Assets/Scenes/FireLevel.unity
     guid: 341578d544d6b3a4ea3a140a874ba944
   - enabled: 1
     path: Assets/Scenes/GoodLevelWin.unity

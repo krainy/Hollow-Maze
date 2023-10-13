@@ -9,6 +9,8 @@ public class OnMouseOver : MonoBehaviour
 
     [SerializeField] NewGameMenuController hoverController;
     [SerializeField] GameObject GameController;
+    [SerializeField] GameObject fullMenu;
+    [SerializeField] int setAnim;
 
     void Awake()
     {
@@ -21,6 +23,7 @@ public class OnMouseOver : MonoBehaviour
     void OnMouseEnter()
     {
         hoverController.ChangeButton(this.gameObject);
+        fullMenu.GetComponent<FullMenuController>().SetAnimIndex = setAnim;
     }
 
     void OnMouseExit()
@@ -41,6 +44,11 @@ public class OnMouseOver : MonoBehaviour
         }
 
 
+    }
+
+    public void LoadFullMenu(int index)
+    {
+        fullMenu.GetComponent<FullMenuController>().SetAnimIndex = index;
     }
 
     // Start is called before the first frame update

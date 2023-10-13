@@ -7,7 +7,8 @@ public class ScenesManager : MonoBehaviour
 {
     [SerializeField] string[] scenes;
 
-    IEnumerator UpdateTheActiveScenes(){
+    IEnumerator UpdateTheActiveScenes()
+    {
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             Scene actualScene = SceneManager.GetSceneAt(i);
@@ -46,7 +47,11 @@ public class ScenesManager : MonoBehaviour
 
     void Awake()
     {
-        sceneLoadAsync("NewGameMenu");
+        if (SceneManager.GetSceneAt(0).name == "1")
+        {
+            sceneLoadAsync("NewGameMenu");
+        }
+
         StartCoroutine(UpdateTheActiveScenes());
 
     }
@@ -73,7 +78,8 @@ public class ScenesManager : MonoBehaviour
         StartCoroutine(UnloadAsynchronously(sceneName));
     }
 
-    public static void sceneUnloadThisScene(){
+    public static void sceneUnloadThisScene()
+    {
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(SceneManager.sceneCount - 1));
     }
 

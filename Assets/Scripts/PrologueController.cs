@@ -12,6 +12,35 @@ public class PrologueController : MonoBehaviour
     [SerializeField][Tooltip("In Seconds")] int timeToStartGame = 10;
     bool anyKeyDown = false;
 
+    [SerializeField] TMP_Text pressButtonText;
+    bool endingPrologue = false;
+
+    IEnumerator AlphaChange_PressButtonText()
+    {
+        yield return new WaitForSeconds(1f);
+
+
+        for (float i = 0; i <= 1; i += 2f * Time.deltaTime)
+        {
+            // set color with i as alpha
+            pressButtonText.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+
+        while (!endingPrologue)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        for (float i = 1; i > 0; i -= 2f * Time.deltaTime)
+        {
+            // set color with i as alpha
+            pressButtonText.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+
+    }
+
     IEnumerator StartGame()
     {
 
@@ -21,6 +50,8 @@ public class PrologueController : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenFadeIn);
 
         }
+
+        endingPrologue = true;
 
         yield return new WaitForSeconds(timeToStartGame);
         gameController.GetComponent<ScenesManager>().sceneLoadAsync("Game");
@@ -50,6 +81,8 @@ public class PrologueController : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(AlphaChange_PressButtonText());
+
         gameController = GameObject.Find("GameController");
 
         foreach (TMP_Text txt in textGameObjects)
