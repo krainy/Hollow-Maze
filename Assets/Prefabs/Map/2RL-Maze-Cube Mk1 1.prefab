@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapFog: {fileID: 8801883538379327804}
+  mainCamera: {fileID: 0}
 --- !u!1 &8229208286017890256
 GameObject:
   m_ObjectHideFlags: 0

@@ -159,6 +159,8 @@ GameObject:
   - component: {fileID: 5524083292445837858}
   - component: {fileID: 249638273241189070}
   - component: {fileID: 4468337003516741337}
+  - component: {fileID: 514182712766115630}
+  - component: {fileID: 5425310648583729804}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -259,6 +261,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 0.1875}
   m_EdgeRadius: 0
+--- !u!70 &514182712766115630
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713653341973688224}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 9.999999, y: 2.6973875}
+  m_Direction: 1
+--- !u!114 &5425310648583729804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713653341973688224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a20e1a05360fe14f919783ff9456ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallElement: 1
+  playerObj: {fileID: 0}
+  scenario: {fileID: 0}
+  isElementalWall: 0
 --- !u!1001 &2225027315702807160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,6 +300,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1094526173078693156, guid: 27e1435a7bb040649b282f3b480285ef, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491915584780837520, guid: 27e1435a7bb040649b282f3b480285ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3537009676797513174, guid: 27e1435a7bb040649b282f3b480285ef, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -314,7 +356,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2TL-Maze-Cube Mk1 1 Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4229203446219264157, guid: 27e1435a7bb040649b282f3b480285ef, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 27e1435a7bb040649b282f3b480285ef, type: 3}
 --- !u!4 &3455695784260089774 stripped
 Transform:

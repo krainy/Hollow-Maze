@@ -6,7 +6,7 @@ public class MinimapController : MonoBehaviour
 {
     
     [SerializeField] GameObject miniMap;
-    GameObject GameController;
+    [SerializeField] GameObject GameController;
 
     void Start(){
         if(GameController == null){
@@ -15,9 +15,9 @@ public class MinimapController : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[2])){
+        if(Input.GetKeyDown(GameController.GetComponent<KeyConfigController>().KeysList[2]) && !GameController.GetComponent<PauseController>().GameIsPaused){
             miniMap.SetActive(true);
-        } else if (Input.GetKeyUp(GameController.GetComponent<KeyConfigController>().KeysList[2])){
+        } else if (Input.GetKeyUp(GameController.GetComponent<KeyConfigController>().KeysList[2]) || Input.anyKeyDown){
             miniMap.SetActive(false);
         } 
     }

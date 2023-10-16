@@ -7,6 +7,10 @@ public class PauseController : MonoBehaviour
 {
 
     [SerializeField] bool gameIsPaused = false;
+    public bool GameIsPaused
+    {
+        get { return gameIsPaused; }
+    }
 
     // Start is called before the first frame update
     void Start()

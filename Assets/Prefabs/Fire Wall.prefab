@@ -276,6 +276,7 @@ MonoBehaviour:
   wallElement: 1
   playerObj: {fileID: 0}
   scenario: {fileID: 0}
+  isElementalWall: 1
 --- !u!114 &1879545572795246034
 MonoBehaviour:
   m_ObjectHideFlags: 0

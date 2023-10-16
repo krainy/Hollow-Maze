@@ -47,12 +47,14 @@ public class ScenesManager : MonoBehaviour
 
     void Awake()
     {
-        if (SceneManager.GetSceneAt(0).name == "1")
-        {
+
+        if(SceneManager.sceneCount < 2){
             sceneLoadAsync("NewGameMenu");
+        } else{
+            SceneManager.UnloadSceneAsync("1");
         }
 
-        StartCoroutine(UpdateTheActiveScenes());
+        //StartCoroutine(UpdateTheActiveScenes());
 
     }
 

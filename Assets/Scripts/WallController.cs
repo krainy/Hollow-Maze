@@ -15,6 +15,7 @@ public class WallController : MonoBehaviour
 
     [SerializeField] GameObject playerObj;
     [SerializeField] ScenarioController scenario;
+    [SerializeField] bool isElementalWall;
 
     // Start is called before the first frame update
     void Start()
@@ -37,14 +38,18 @@ public class WallController : MonoBehaviour
             {
                 Debug.Log("Tem o mesmo elemento!");
                 //playerObj.GetComponent<DEMOPlayerPowerup>().UsedElement();
-                playerObj.GetComponent<DEMOPlayerPowerup>().Element = 0;
+                if (isElementalWall)
+                {
+
+                    playerObj.GetComponent<DEMOPlayerPowerup>().Element = 0;
+                }
 
 
                 Destroy(this.gameObject);
             }
             else
             {
-                playerObj.GetComponent<PlayerLifeController>().takesDamage();
+                if (isElementalWall) playerObj.GetComponent<PlayerLifeController>().takesDamage();
             }
         }
     }
@@ -53,7 +58,7 @@ public class WallController : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            if (playerObj.GetComponent<DEMOPlayerPowerup>().Element != wallElement && playerObj.GetComponent<PlayerController>().InGround && playerObj.GetComponent<Rigidbody2D>().velocity.y == 0)
+            if (playerObj.GetComponent<DEMOPlayerPowerup>().Element != wallElement && playerObj.GetComponent<PlayerController>().InGround && playerObj.GetComponent<Rigidbody2D>().velocity.y == 0 && isElementalWall)
             {
                 playerObj.GetComponent<PlayerController>().ElementalContact = true;
                 scenario.DoubleRotation();
