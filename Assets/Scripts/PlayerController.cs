@@ -191,6 +191,7 @@ public class PlayerController : MonoBehaviour
             if (strongImpact)
             {
                 strongImpact = false;
+                this.gameObject.GetComponent<StrongImpactController>().StrongImpact();
                 Debug.Log("Soltou animação de ventinho");
             }
 
