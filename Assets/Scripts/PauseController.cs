@@ -11,6 +11,7 @@ public class PauseController : MonoBehaviour
     {
         get { return gameIsPaused; }
     }
+    GameObject gameCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,9 @@ public class PauseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        print(SceneManager.sceneCount + " " + SceneManager.GetActiveScene().name);
+
 
         if (Input.GetKeyDown(this.GetComponent<KeyConfigController>().KeysList[3]) && gameIsPaused)
         {
@@ -34,10 +38,13 @@ public class PauseController : MonoBehaviour
 
     public void PausedGame()
     {
+
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Game" && SceneManager.sceneCount < 2)
+        if (scene.buildIndex >= 5 && scene.buildIndex <= 12)
         {
+            gameCanvas = GameObject.Find("GameCanvas");
+            gameCanvas.SetActive(false);
             gameIsPaused = !gameIsPaused;
             Time.timeScale = 0;
             SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
@@ -49,8 +56,9 @@ public class PauseController : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Game" && SceneManager.sceneCount == 2)
+        if (SceneManager.sceneCount <= 2 && scene.buildIndex >= 5 && scene.buildIndex <= 12)
         {
+            gameCanvas.SetActive(true);
             SceneManager.UnloadSceneAsync("Pause");
             gameIsPaused = !gameIsPaused;
             Time.timeScale = 1;
@@ -60,6 +68,7 @@ public class PauseController : MonoBehaviour
 
     public void ReleaseGameByChangeScene()
     {
+        gameCanvas.SetActive(true);
         SceneManager.UnloadSceneAsync("Pause");
         gameIsPaused = !gameIsPaused;
         Time.timeScale = 1;

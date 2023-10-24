@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5726825927565019074}
   - component: {fileID: 5726825927565019077}
   - component: {fileID: 5726825927565019076}
-  m_Layer: 0
+  - component: {fileID: 2459470384883507883}
+  m_Layer: 7
   m_Name: Bed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueText: {fileID: 0}
   dialogueIterator: 0
+  interactOnlyOnce: 0
+  indexOfEndDialogue: 0
   dialogues:
   - "Parece que algu\xE9m deixou uma carta para tr\xE1s"
   - "\"Se estiver lendo isso, voc\xEA teve o mesmo destino cruel que eu"
@@ -159,3 +162,17 @@ MonoBehaviour:
   - 2
   - 2
   - 4
+--- !u!114 &2459470384883507883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726825927565019079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1603f29ea28c69d4cbb7a7da53d82ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToEasterEgg: 100
+  objectForSceneChange: {fileID: 0}

@@ -7,6 +7,13 @@ public class OnMouseOver : MonoBehaviour
 
     [SerializeField] bool mouseOnHover = false;
 
+
+    [SerializeField] state whichUsage;
+    enum state
+    {
+        fullMenuController,
+    }
+
     [SerializeField] NewGameMenuController hoverController;
     [SerializeField] GameObject GameController;
     [SerializeField] GameObject fullMenu;
@@ -22,8 +29,14 @@ public class OnMouseOver : MonoBehaviour
 
     void OnMouseEnter()
     {
-        hoverController.ChangeButton(this.gameObject);
-        fullMenu.GetComponent<FullMenuController>().SetAnimIndex = setAnim;
+        switch (whichUsage)
+        {
+            case state.fullMenuController:
+                hoverController.ChangeButton(this.gameObject);
+                fullMenu.GetComponent<FullMenuController>().SetMouseHoverIndex = setAnim;
+                break;
+        }
+
     }
 
     void OnMouseExit()
@@ -33,14 +46,18 @@ public class OnMouseOver : MonoBehaviour
 
     void OnMouseDown()
     {
-
-        if (this.gameObject.name != "Exit")
+        switch (whichUsage)
         {
-            GameController.GetComponent<ScenesManager>().sceneLoadAdditive(this.gameObject.name);
-        }
-        else
-        {
-            Application.Quit();
+            case state.fullMenuController:
+                if (this.gameObject.name != "Exit")
+                {
+                    GameController.GetComponent<ScenesManager>().sceneLoadAdditive(this.gameObject.name);
+                }
+                else
+                {
+                    Application.Quit();
+                }
+                break;
         }
 
 

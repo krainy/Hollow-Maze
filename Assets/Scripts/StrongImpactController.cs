@@ -7,9 +7,11 @@ public class StrongImpactController : MonoBehaviour
 
     [SerializeField] Transform airFlowTransform;
     [SerializeField] GameObject airFlowPrefab;
+    [SerializeField] AudioSource fallSFX;
 
     public void StrongImpact()
     {
         Instantiate(airFlowPrefab, airFlowTransform.position, Quaternion.identity);
+        fallSFX.Play();
     }
 }

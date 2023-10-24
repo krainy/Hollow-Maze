@@ -53,10 +53,33 @@ public class PrologueController : MonoBehaviour
 
         endingPrologue = true;
 
-        yield return new WaitForSeconds(timeToStartGame);
-        gameController.GetComponent<ScenesManager>().sceneLoadAsync("Game");
+
+
+        yield return new WaitForSeconds(timeToStartGame - 2);
+
+        foreach (TMP_Text txt in textGameObjects)
+        {
+            StartCoroutine("textFadeOut", txt);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        gameController.GetComponent<ScenesManager>().sceneLoadAsync("GameContent");
 
         yield return null;
+    }
+
+    IEnumerator textFadeOut(TMP_Text text)
+    {
+        for (float i = 2f; i >= 0; i -= Time.deltaTime)
+        {
+            float alpha = i / 2;
+
+            // set color with i as alpha
+            text.color = new Color(1, 1, 1, alpha);
+            yield return null;
+        }
     }
 
     IEnumerator textFadeIn(TMP_Text text)
@@ -102,7 +125,7 @@ public class PrologueController : MonoBehaviour
 
             anyKeyDown = true;
 
-            gameController.GetComponent<ScenesManager>().sceneLoadAsync("Game");
+            gameController.GetComponent<ScenesManager>().sceneLoadAsync("GameContent");
         }
     }
 }

@@ -6,6 +6,16 @@ public class MapSquareController : MonoBehaviour
 {
     [SerializeField] GameObject MapFog;
     [SerializeField] Camera mainCamera;
+    bool isComputing = false;
+
+    void OnEnable()
+    {
+        if (this.gameObject.scene.name == "DontDestroyOnLoad" && mainCamera != null && MapFog != null)
+        {
+            print("comecou");
+            StartCoroutine(FOGController());
+        }
+    }
 
 
     IEnumerator FOGController()
@@ -14,6 +24,7 @@ public class MapSquareController : MonoBehaviour
         if (viewPos.x >= 0 && viewPos.y >= 0 && viewPos.x <= 1 && viewPos.y <= 1)
         {
             Destroy(MapFog);
+            this.enabled = false;
         }
         else
         {
@@ -25,21 +36,44 @@ public class MapSquareController : MonoBehaviour
 
     }
 
-    void Awake()
+    void Start()
     {
-        MapFog.SetActive(true);
-        mainCamera = GameObject.Find("Game Camera").GetComponent<Camera>();
+        if (this.gameObject.CompareTag("ElementalWall"))
+        {
+            if (!GameObject.Find("Rogerio").GetComponent<MinimapController>().CanSeeElementalWalls)
+            {
+                MapFog.SetActive(true);
+            }
+        }
+        else
+        {
 
+            MapFog.SetActive(true);
+
+        }
+
+        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         StartCoroutine(FOGController());
     }
 
 
 
-    /*void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        if (GameObject.Find("Rogerio").GetComponent<MinimapController>().CanSeeElementalWalls)
         {
-            Destroy(MapFog);
+            if (collider.gameObject.CompareTag("ElementalWall"))
+            {
+                Destroy(MapFog);
+            }
         }
-    }*/
+
+        if (GameObject.Find("Rogerio").GetComponent<MinimapController>().CanSeeSpiders)
+        {
+            if (collider.gameObject.CompareTag("Spider"))
+            {
+                Destroy(MapFog);
+            }
+        }
+    }
 }

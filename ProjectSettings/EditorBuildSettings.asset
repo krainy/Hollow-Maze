@@ -21,8 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Accessibility.unity
     guid: e7f058e7208a8054bbd0b7267172a50c
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/GameContent.unity
     guid: 9e951b88682f7a34d9c31b0f55ee0233
+  - enabled: 1
+    path: Assets/Scenes/InitialLevel.unity
+    guid: 2aed341454d5a5b4fa676086acc66602
   - enabled: 1
     path: Assets/Scenes/FireLevel.unity
     guid: 341578d544d6b3a4ea3a140a874ba944
@@ -30,19 +33,25 @@ EditorBuildSettings:
     path: Assets/Scenes/AirLevel.unity
     guid: 11384f6bbf2366c4490febb619668771
   - enabled: 1
+    path: Assets/Scenes/EarthLevel.unity
+    guid: 1800d65c5a56520489de27e39e963b95
+  - enabled: 1
+    path: Assets/Scenes/WaterLevel.unity
+    guid: ae5a289e25668f249b3ad9293ed1e053
+  - enabled: 1
+    path: Assets/Scenes/SpiderQueenNest.unity
+    guid: 633d1dfae69946e4a9544a0807cf84b3
+  - enabled: 1
+    path: Assets/Scenes/Pause.unity
+    guid: 0e00812a4c31a704287f2041c51bfbe7
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 46f7584edb4583d498a6cc5ea54cc8dd
+  - enabled: 1
     path: Assets/Scenes/GoodLevelWin.unity
     guid: 7f9d6225247a17c41acd1f1909a11cf1
   - enabled: 1
     path: Assets/Scenes/BadLevelWin.unity
     guid: 452afe806e690ef47a2672e3858303d1
-  - enabled: 1
-    path: Assets/Scenes/GameOver.unity
-    guid: 46f7584edb4583d498a6cc5ea54cc8dd
-  - enabled: 1
-    path: Assets/Scenes/Pause.unity
-    guid: 0e00812a4c31a704287f2041c51bfbe7
-  - enabled: 1
-    path: Assets/Scenes/SpiderQueenNest.unity
-    guid: 633d1dfae69946e4a9544a0807cf84b3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 514078e1717ede14fa5e7a58012259d2, type: 2}

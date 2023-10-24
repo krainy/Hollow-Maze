@@ -20,8 +20,8 @@ public class WallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = GameObject.Find("weeee");
-        scenario = GameObject.Find("Maze").GetComponent<ScenarioController>();
+        playerObj = GameObject.Find("Rogerio");
+        scenario = this.gameObject.transform.parent.gameObject.GetComponent<ScenarioController>();
     }
 
     // Update is called once per frame

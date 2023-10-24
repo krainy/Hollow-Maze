@@ -25,12 +25,57 @@ public class ScenarioController : MonoBehaviour
         get { return rotating; }
     }
 
+    [SerializeField] Object[] ocurr;
+
+    void OnEnable()
+    {
+        if (this.gameObject.scene.name == "DontDestroyOnLoad")
+        {
+            print("The object " + this.gameObject.name + " is kept between levels.");
+
+            GameController = GameObject.Find("GameController");
+            if (GameController.GetComponent<SpawnController>().ActualEnableMaze != null)
+            {
+
+                this.gameObject.GetComponent<LocalSpawnsController>().NeedSpawn(GameController.GetComponent<SpawnController>().ActualEnableMaze.name + "Spawn");
+            }
+        }
+    }
+
+    void Awake()
+    {
+        ocurr = FindObjectsByType(typeof(ScenarioController), FindObjectsInactive.Include, FindObjectsSortMode.None);
+        int qtd = 0;
+
+        foreach (Object maze in ocurr)
+        {
+            if (maze.name == this.gameObject.name)
+            {
+                qtd++;
+            }
+        }
+
+        GameController = GameObject.Find("GameController");
+
+        if (qtd > 1)
+        {
+            GameController.GetComponent<SpawnController>().SetActiveActualMaze(this.gameObject.name);
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
     void Start()
     {
-        if (GameController == null)
-        {
-            GameController = GameObject.Find("GameController");
-        }
+        playerGO = GameObject.Find("Rogerio");
+        playerScript = playerGO.GetComponent<PlayerController>();
+
+        GameController = GameObject.Find("GameController");
+        GameController.GetComponent<SpawnController>().AddUsableMaze(this.gameObject);
+
     }
 
     IEnumerator RotateWalls(int rotation)

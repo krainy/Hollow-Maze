@@ -6,6 +6,12 @@ TagManager:
   tags:
   - gameController
   - Button
+  - Initial-Maze
+  - FireLevel
+  - AirLevel
+  - Spawn
+  - ElementalWall
+  - Spider
   layers:
   - Default
   - TransparentFX
@@ -14,7 +20,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Other
   - 
   - 
   - 

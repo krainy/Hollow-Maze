@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] bool testing;
+    [SerializeField] GameObject GameController;
+    [SerializeField] AudioSource fallSFX;
     [SerializeField] Animator anim;
     [SerializeField] DEMOPlayerPowerup playerPowerup;
     [SerializeField] GameObject checkGround;
     [SerializeField] GameObject scenarioObj;
+    public GameObject ScenarioObj
+    {
+        set { scenarioObj = value; }
+    }
+
     [SerializeField] LayerMask layerGround;
+    [SerializeField] LayerMask layerOther;
     [SerializeField] bool inGround;
     public bool InGround
     {
@@ -45,6 +55,18 @@ public class PlayerController : MonoBehaviour
     public bool ElementalContact
     {
         set { elementalWall = value; }
+    }
+    [SerializeField] bool hasGoodEnding = false;
+    public bool HasGoodEnding
+    {
+        get { return hasGoodEnding; }
+    }
+
+    void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        GameController = GameObject.Find("GameController");
+        if (!testing) GameController.GetComponent<ScenesManager>().sceneLoadAdditive("InitialLevel");
     }
 
     void AfterJump()
@@ -97,6 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         toCheckGround();
 
+
         switch (playerPowerup.Element)
         {
             case 0:
@@ -134,6 +157,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if ((gambiarra && !jumped && inGround))
         {
             jumped = true;
@@ -181,21 +205,48 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, layerGround))
         {
-            if (!inGround)
-            {
-                scenarioObj.GetComponent<ScenarioController>().ToFreeRotation();
-            }
 
-            inGround = true;
 
             if (strongImpact)
             {
                 strongImpact = false;
+                inGround = true;
+                scenarioObj.GetComponent<ScenarioController>().ToFreeRotation();
                 this.gameObject.GetComponent<StrongImpactController>().StrongImpact();
                 Debug.Log("Soltou animação de ventinho");
             }
 
+            if (!inGround)
+            {
+
+                scenarioObj.GetComponent<ScenarioController>().ToFreeRotation();
+                fallSFX.Play();
+            }
+
+            inGround = true;
+
+
+
             //anim.SetBool("isJumping", false);
+
+        }
+        else if (Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, layerOther))
+        {
+
+
+            if (!inGround)
+            {
+                fallSFX.Play();
+            }
+
+            inGround = true;
+
+            if (playerRB.velocity.y == 0f)
+            {
+                scenarioObj.GetComponent<ScenarioController>().ToFreeRotation();
+                strongImpact = false;
+            }
+
 
         }
         else
@@ -205,6 +256,17 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+
+    public void ChangeScenarioObj()
+    {
+        if (GameController != null)
+        {
+            if (scenarioObj != GameController.GetComponent<SpawnController>().ActualEnableMaze)
+            {
+                scenarioObj = GameController.GetComponent<SpawnController>().ActualEnableMaze;
+            }
+        }
     }
 
 }

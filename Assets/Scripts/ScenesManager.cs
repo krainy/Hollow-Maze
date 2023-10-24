@@ -6,6 +6,16 @@ using UnityEngine.SceneManagement;
 public class ScenesManager : MonoBehaviour
 {
     [SerializeField] string[] scenes;
+    [SerializeField] string actualSceneName;
+    public string ActualSceneName
+    {
+        get { return actualSceneName; }
+    }
+    [SerializeField] int actualSceneIndex;
+    public int ActualSceneIndex
+    {
+        get { return actualSceneIndex; }
+    }
 
     IEnumerator UpdateTheActiveScenes()
     {
@@ -47,10 +57,14 @@ public class ScenesManager : MonoBehaviour
 
     void Awake()
     {
+        SceneManager.activeSceneChanged += ChangedActiveScene;
 
-        if(SceneManager.sceneCount < 2){
+        if (SceneManager.sceneCount < 2)
+        {
             sceneLoadAsync("NewGameMenu");
-        } else{
+        }
+        else
+        {
             SceneManager.UnloadSceneAsync("1");
         }
 
@@ -58,13 +72,59 @@ public class ScenesManager : MonoBehaviour
 
     }
 
+    void ChangedActiveScene(Scene currentScene, Scene nextScene)
+    {
+
+        Debug.Log(nextScene.name + " Scene has been loaded.");
+        actualSceneName = nextScene.name;
+        actualSceneIndex = nextScene.buildIndex;
+
+        if (nextScene.buildIndex <= 2 || nextScene.buildIndex >= 13)
+        {
+
+            GameObject playerGameObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerGameObject != null)
+            {
+                Destroy(playerGameObject);
+            }
+
+            GameObject mainCameraObject = GameObject.Find("MainCamera");
+            if (mainCameraObject != null)
+            {
+                Destroy(mainCameraObject);
+            }
+
+            this.gameObject.GetComponent<SpawnController>().DestroyAllMazes();
+
+        }
+
+        if (nextScene.name == "GameContent")
+        {
+            StartCoroutine(UnloadSceneAfterTime("GameContent", 1f));
+        }
+
+    }
+
+    IEnumerator UnloadSceneAfterTime(string sceneName, float time)
+    {
+        yield return new WaitForSeconds(time);
+        sceneUnloadAsync(sceneName);
+        yield return null;
+    }
+
     void Update()
     {
-        Debug.Log(SceneManager.GetSceneAt(SceneManager.sceneCount - 1).name);
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            sceneLoadAsync("newGameMenu");
+        }
     }
 
     public void sceneLoadAsync(string sceneName)
     {
+
+
+
         Debug.Log("Loading scene: " + sceneName);
         StartCoroutine(LoadAsynchronously(sceneName));
 

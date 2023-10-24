@@ -6,29 +6,44 @@ public class SpiderController : MonoBehaviour
 {
 
     [SerializeField] GameObject playerObj;
+    [SerializeField] int spiderElement;
+    [SerializeField] Animator spiderAnim;
     //[SerializeField] PlayerLifeController playerLife;
     //[SerializeField] PlayerPowerupController playerPowerUp;
 
     // Start is called before the first frame update
-    void Start()
-    {
 
+    IEnumerator SpiderCanDisappear()
+    {
+        Camera mainCamera = GameObject.Find("Auxiliar Camera").GetComponent<Camera>();
+        Vector3 viewPos = mainCamera.WorldToViewportPoint(this.gameObject.GetComponent<Transform>().position);
+        if (!(viewPos.x > 0 && viewPos.y > 0 && viewPos.x < 1 && viewPos.y < 1))
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(SpiderCanDisappear());
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-
+        playerObj = GameObject.Find("Rogerio");
+        spiderAnim = this.gameObject.GetComponent<Animator>();
+        spiderAnim.SetInteger("Element", spiderElement);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("Player"))
         {
+            playerObj.GetComponent<DEMOPlayerPowerup>().Element = spiderElement;
 
-            if (playerObj.GetComponent<DEMOPlayerPowerup>().Element == 0)
+            if (spiderElement == 0)
             {
-                playerObj.GetComponent<DEMOPlayerPowerup>().Element = 1;
+                playerObj.GetComponent<MinimapController>().CanSeeElementalWalls = true;
             }
 
             if (playerObj.GetComponent<Rigidbody2D>().velocity.y <= -20)
@@ -42,6 +57,12 @@ public class SpiderController : MonoBehaviour
             else
             {
                 Debug.Log("Né que chegou sem matar a aranha, congratulaixons!");
+
+                if (spiderElement == 0)
+                {
+                    playerObj.GetComponent<MinimapController>().CanSeeSpiders = true;
+                    StartCoroutine(SpiderCanDisappear());
+                }
 
             }
 
